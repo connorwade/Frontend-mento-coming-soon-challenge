@@ -1,0 +1,196 @@
+//color vars
+$red: hsl(0, 36%, 70%);
+$softRed: hsl(0, 93%, 68%);
+$grayishRed: hsl(0, 6%, 24%);
+$whiteGradient: linear-gradient(to right, hsl(0, 0%, 100%), hsl(0,100%, 98%));
+$redGradient: linear-gradient(to right, hsl(0, 80%, 86%), hsl(0, 74%, 74%));
+
+
+$fontSize: 16px;
+$family: 'Josefin Sans', sans-serif;
+
+$desktop: 700px;
+$small-screen: 360px;
+
+@mixin small-screen {
+    @media (max-width: #{$small-screen}) {
+      @content;
+    }
+  }
+
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+      @content;
+    }
+  }
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, html{
+    height: 100%;
+}
+
+body{
+    font-family: $family;
+    font-size: $fontSize;
+    background-color: $whiteGradient;
+    font-weight: 300;
+    @include desktop(){
+        display: grid;
+        grid-template-columns: 60% 40%;
+        grid-template-rows: 10% 90%;
+        grid-template-areas: 
+        "header pic"
+        "main pic";
+    }
+}
+
+header{
+    height: 10%;
+    padding: 24px;
+    div{
+        height: 25%;
+    }
+    @include desktop(){
+        position: relative;
+        margin: 0 auto;
+        grid-area: header;
+        width: 60%;
+        max-width: 461px;
+        min-width: 430px;
+        padding-left: 20px;
+        div{
+            margin: 0 auto;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            background-image: url('images/logo.svg');
+            svg{
+            }
+        }
+    }
+}
+
+.hero{
+    width: 100%;
+    height: 30%;
+    background-image: url("/images/hero-mobile.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @include desktop(){
+        background-image: url("/images/hero-desktop.jpg");
+        grid-area: pic;
+        height: 100%;
+    }
+}
+
+main{
+    height: 60%;
+    text-align: center;
+    color: $red;
+    padding: 64px 20px;
+    h1{
+        font-weight: 100;
+        opacity: .7;
+    }
+    h1, h2{
+        letter-spacing: 10px;
+        text-transform: uppercase;
+        font-size: 3rem;
+        @include small-screen(){
+            font-size: 2.5rem;
+        }
+    }
+    h2{
+        color: $grayishRed;
+    }
+    p{
+        padding: 24px 0px;
+        line-height: 1.7;
+        @include small-screen(){
+            font-size: .8rem;
+        }
+    }
+    div{
+        height: 13%;
+        position: relative;
+        @include desktop(){
+            height: 10%;
+            min-height: 40px;
+        }
+        input, button{
+            border-radius: 30px;
+            height: 100%;
+        }
+        input{
+            border: 1px solid $red;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-left: 24px;
+            color: $red;
+            &::placeholder{
+                color: $red;
+                font-family: $family;
+                font-size: 1rem;
+                font-weight: 200;
+                opacity: .5;
+            }
+            &:focus{
+                outline-width: 0;
+            }
+        }
+        button{
+            background: $redGradient;
+            position: absolute;
+            width: 20%;
+            right: 0%;
+            top: 0%;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            transition: .3s;
+            &:focus{
+                outline-width: 0;
+            }
+            &:hover{
+                box-shadow: 2px 2px 5px $grayishRed;
+            }
+            &:active{
+                box-shadow: 0px 0px 0px $grayishRed;
+            }
+        }
+        #warning{
+            position: absolute;
+            right: 25%;
+            top: 24%;
+            z-index: 1;
+        }
+        #warning-message{
+            color: $softRed;
+            position: absolute;
+            top: 60%;
+            left: 5%;
+        }
+        .hidden{
+            display: none;
+        }
+    }
+    @include desktop(){
+        margin: 0 auto;
+        grid-area: main;
+        height: 100%;
+        text-align: left;
+        max-width: 500px;
+        padding: 160px 20px;
+    }
+}
+
